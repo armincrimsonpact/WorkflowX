@@ -9,18 +9,18 @@ const footerSections = [
       { href: '/features', label: 'Features' },
       { href: '/solutions', label: 'Solutions' },
       { href: '/pricing', label: 'Pricing' },
+      { href: '/contact', label: 'Contact Sales' },
       { href: '#', label: 'API Documentation' },
-      { href: '#', label: 'System Status' },
     ]
   },
   {
     title: 'Company',
     links: [
       { href: '/about', label: 'About Us' },
-      { href: '#', label: 'Careers' },
+      { href: '/careers', label: 'Careers' },
+      { href: '/contact', label: 'Contact' },
       { href: '#', label: 'Press Kit' },
       { href: '#', label: 'Blog' },
-      { href: '#', label: 'Investors' },
     ]
   },
   {

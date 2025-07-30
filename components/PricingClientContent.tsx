@@ -105,7 +105,7 @@ export default function PricingClientContent({ plans, faqs }: Props) {
             {plans.map((plan, index) => (
               <motion.div
                 key={plan.name}
-                className={`relative p-8 rounded-2xl cursor-pointer ${
+                className={`relative p-8 rounded-2xl cursor-pointer rotating-border ${
                   plan.popular ? 'glass-turquoise border-2 border-turquoise-primary' : 'glass'
                 }`}
                 variants={itemVariants}

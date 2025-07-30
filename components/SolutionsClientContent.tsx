@@ -138,7 +138,7 @@ export default function SolutionsClientContent({ solutions, benefits }: Props) {
               return (
                 <motion.div
                   key={solution.title}
-                  className="glass p-8 rounded-2xl cursor-pointer"
+                  className="glass p-8 rounded-2xl cursor-pointer rotating-border"
                   variants={itemVariants}
                   whileHover="hover"
                   whileTap={{ scale: 0.98 }}

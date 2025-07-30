@@ -1,44 +1,51 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import { Analytics } from '@vercel/analytics/react';
+import MouseHover from '@/components/MouseHover';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'WorkflowX - Human in the Lead AI Automation',
-  description: 'Empower your team with intelligent automation that amplifies human creativity. AI workflows where humans lead and technology follows.',
-  keywords: 'AI automation, workflow automation, human-centered AI, business process automation',
+  title: 'WorkflowX - AI Workflows with Human in the Lead',
+  description: 'Empower your team with intelligent automation that amplifies human creativity and decision-making. Build workflows where AI serves your vision.',
+  keywords: 'AI automation, workflow, human-centric AI, productivity, business automation',
   authors: [{ name: 'WorkflowX Team' }],
   creator: 'WorkflowX',
   publisher: 'WorkflowX',
   robots: 'index, follow',
+  metadataBase: new URL('https://workflowx.com'),
   openGraph: {
-    title: 'WorkflowX - Human in the Lead AI Automation',
-    description: 'Empower your team with intelligent automation that amplifies human creativity.',
+    title: 'WorkflowX - AI Workflows with Human in the Lead',
+    description: 'Empower your team with intelligent automation that amplifies human creativity and decision-making.',
     url: 'https://workflowx.com',
     siteName: 'WorkflowX',
-    type: 'website',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'WorkflowX - AI Workflows with Human in the Lead',
+      },
+    ],
     locale: 'en_US',
+    type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'WorkflowX - Human in the Lead AI Automation',
-    description: 'Empower your team with intelligent automation that amplifies human creativity.',
+    title: 'WorkflowX - AI Workflows with Human in the Lead',
+    description: 'Empower your team with intelligent automation that amplifies human creativity and decision-making.',
+    images: ['/og-image.jpg'],
   },
-  viewport: 'width=device-width, initial-scale=1',
-  themeColor: '#0a0a0a',
-  manifest: '/manifest.json',
-  icons: {
-    icon: [
-      { url: '/favicon.ico' },
-      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-    ],
-    apple: [
-      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
-    ],
-  },
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#3b82f6' },
+    { media: '(prefers-color-scheme: dark)', color: '#0a0a0a' },
+  ],
 };
 
 export default function RootLayout({
@@ -48,14 +55,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-      </head>
       <body className={inter.className}>
+        <MouseHover />
         {children}
-        <Analytics />
       </body>
     </html>
   );

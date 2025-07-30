@@ -138,7 +138,7 @@ export default function AboutClientContent({ values, milestones, team, stats }: 
               return (
                 <motion.div
                   key={value.title}
-                  className="glass p-8 rounded-2xl cursor-pointer"
+                  className="glass p-8 rounded-2xl cursor-pointer rotating-border"
                   variants={itemVariants}
                   whileHover="hover"
                   whileTap={{ scale: 0.98 }}

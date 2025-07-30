@@ -144,7 +144,7 @@ export default function FeaturesClientContent({ features, additionalFeatures }: 
               return (
                 <motion.div
                   key={feature.title}
-                  className="glass p-8 rounded-2xl cursor-pointer"
+                  className="glass p-8 rounded-2xl cursor-pointer rotating-border"
                   variants={itemVariants}
                   whileHover="hover"
                   whileTap={{ scale: 0.98 }}
