@@ -1,0 +1,2027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorkflowX - Human in the Lead AI Automation</title>
+    <meta name="description" content="Empower your team with intelligent automation that amplifies human creativity. AI workflows where humans lead and technology follows.">
+    <meta name="keywords" content="AI automation, workflow automation, human-centered AI, business process automation">
+    <link rel="canonical" href="https://workflowx.com">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="WorkflowX - Human in the Lead AI Automation">
+    <meta property="og:description" content="Empower your team with intelligent automation that amplifies human creativity.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://workflowx.com">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-black: #0a0a0a;
+            --bg-dark: #111111;
+            --bg-section: #0f0f0f;
+            --blue-primary: #3b82f6;
+            --blue-light: #60a5fa;
+            --blue-dark: #1e40af;
+            --turquoise-primary: #06b6d4;
+            --turquoise-light: #22d3ee;
+            --turquoise-dark: #0891b2;
+            --aubergine-primary: #7c3aed;
+            --aubergine-light: #a78bfa;
+            --aubergine-dark: #5b21b6;
+            --white: #ffffff;
+            --gray-light: #f8fafc;
+            --gray-medium: #64748b;
+            --gray-dark: #334155;
+            --success: #10b981;
+            --error: #ef4444;
+            --warning: #f59e0b;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-black);
+            color: var(--white);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Glassmorphism utility classes */
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+        }
+
+        .glass-blue {
+            background: rgba(59, 130, 246, 0.15);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 16px;
+        }
+
+        .glass-turquoise {
+            background: rgba(6, 182, 212, 0.15);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            border-radius: 16px;
+        }
+
+        .glass-aubergine {
+            background: rgba(124, 58, 237, 0.15);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            border-radius: 16px;
+        }
+
+        /* Animated background */
+        .bg-animated {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bg-gradient {
+            position: absolute;
+            width: 120%;
+            height: 120%;
+            background: radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, rgba(124, 58, 237, 0.3) 0%, transparent 50%);
+            animation: gradientMove 20s ease-in-out infinite;
+        }
+
+        @keyframes gradientMove {
+            0%, 100% { transform: translate(-10%, -10%) rotate(0deg); }
+            50% { transform: translate(10%, 10%) rotate(180deg); }
+        }
+
+        /* Page container */
+        .page-container {
+            display: none;
+            min-height: 100vh;
+            padding-top: 100px;
+        }
+
+        .page-container.active {
+            display: block;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            padding: 12px 32px;
+            transition: all 0.3s ease;
+            max-width: 1200px;
+            width: 90%;
+        }
+
+        .nav-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--blue-primary), var(--turquoise-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--turquoise-light);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--turquoise-primary), var(--blue-primary));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, var(--blue-primary), var(--turquoise-primary));
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--white);
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        /* Container and common elements */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, var(--white), var(--turquoise-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--gray-medium);
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 60px;
+            line-height: 1.7;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            padding: 16px 32px;
+            background: linear-gradient(135deg, var(--blue-primary), var(--turquoise-primary));
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            font-size: 18px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-secondary {
+            padding: 16px 32px;
+            background: transparent;
+            border: 2px solid var(--aubergine-primary);
+            border-radius: 12px;
+            color: var(--aubergine-light);
+            font-weight: 600;
+            font-size: 18px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background: var(--aubergine-primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(124, 58, 237, 0.3);
+        }
+
+        /* HOME PAGE STYLES */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 1200px;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800;
+            margin-bottom: 24px;
+            line-height: 1.1;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.5s forwards;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--blue-primary), var(--turquoise-primary), var(--aubergine-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% 200%;
+            animation: gradientText 3s ease-in-out infinite;
+        }
+
+        @keyframes gradientText {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            color: var(--gray-medium);
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 1s forwards;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 1.5s forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Features Section */
+        .features {
+            padding: 120px 20px;
+            position: relative;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 80px;
+        }
+
+        .feature-card {
+            padding: 40px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--blue-primary), var(--turquoise-primary), var(--aubergine-primary));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .feature-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--white);
+        }
+
+        .feature-description {
+            color: var(--gray-medium);
+            line-height: 1.7;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(124, 58, 237, 0.1));
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, var(--turquoise-primary), var(--blue-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: var(--gray-medium);
+            font-weight: 500;
+        }
+
+        /* PAGE SPECIFIC STYLES */
+        .page-header {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(124, 58, 237, 0.05));
+        }
+
+        .page-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--white), var(--turquoise-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-description {
+            font-size: 1.2rem;
+            color: var(--gray-medium);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .content-section {
+            padding: 80px 20px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .content-card {
+            padding: 40px;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--white);
+        }
+
+        .card-description {
+            color: var(--gray-medium);
+            line-height: 1.7;
+        }
+
+        /* PRICING STYLES */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .pricing-card {
+            padding: 40px;
+            border-radius: 20px;
+            position: relative;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .pricing-card.featured {
+            border: 2px solid var(--turquoise-primary);
+            position: relative;
+        }
+
+        .pricing-card.featured::before {
+            content: 'Most Popular';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--turquoise-primary), var(--blue-primary));
+            color: white;
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--white);
+        }
+
+        .plan-price {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, var(--turquoise-primary), var(--blue-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .plan-period {
+            color: var(--gray-medium);
+            margin-bottom: 32px;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .plan-features li {
+            padding: 8px 0;
+            color: var(--gray-medium);
+            position: relative;
+            padding-left: 24px;
+        }
+
+        .plan-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        /* CONTACT FORM STYLES */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px;
+            border-radius: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--white);
+            font-weight: 500;
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            color: var(--white);
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--turquoise-primary);
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+        }
+
+        .form-input::placeholder, .form-textarea::placeholder {
+            color: var(--gray-medium);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--blue-primary), var(--turquoise-primary));
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+        }
+
+        .form-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .form-message {
+            margin-top: 16px;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .form-message.success {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--success);
+            color: var(--success);
+        }
+
+        .form-message.error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--error);
+            color: var(--error);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 120px 20px;
+            text-align: center;
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 40px;
+            position: relative;
+        }
+
+        .cta-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, var(--white), var(--turquoise-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cta-description {
+            font-size: 18px;
+            color: var(--gray-medium);
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 60px 20px 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--bg-section);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section ul li a {
+            color: var(--gray-medium);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--turquoise-light);
+        }
+
+        .footer-logo {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--blue-primary), var(--turquoise-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-text {
+            color: var(--gray-medium);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray-medium);
+        }
+
+        /* Floating particles */
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--turquoise-primary);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .particle:nth-child(odd) {
+            background: var(--blue-primary);
+            animation-delay: -2s;
+        }
+
+        .particle:nth-child(3n) {
+            background: var(--aubergine-primary);
+            animation-delay: -4s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(10, 10, 10, 0.95);
+                backdrop-filter: blur(20px);
+                border-radius: 16px;
+                padding: 20px;
+                flex-direction: column;
+                gap: 16px;
+                margin-top: 10px;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            
+            .mobile-menu-toggle.active span:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+            
+            .mobile-menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .mobile-menu-toggle.active span:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .features-grid, .content-grid, .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+
+        /* Animation utilities */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading spinner */
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--turquoise-primary);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animated">
+        <div class="bg-gradient"></div>
+    </div>
+
+    <!-- Floating Particles -->
+    <div class="particle" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
+    <div class="particle" style="top: 60%; left: 85%; animation-delay: -1s;"></div>
+    <div class="particle" style="top: 80%; left: 20%; animation-delay: -2s;"></div>
+    <div class="particle" style="top: 30%; left: 70%; animation-delay: -3s;"></div>
+    <div class="particle" style="top: 50%; left: 5%; animation-delay: -4s;"></div>
+    <div class="particle" style="top: 10%; left: 90%; animation-delay: -5s;"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar glass">
+        <div class="nav-content">
+            <div class="logo" onclick="showPage('home')">WorkflowX</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" onclick="showPage('home')" data-page="home">Home</a></li>
+                <li><a href="#" onclick="showPage('features')" data-page="features">Features</a></li>
+                <li><a href="#" onclick="showPage('solutions')" data-page="solutions">Solutions</a></li>
+                <li><a href="#" onclick="showPage('pricing')" data-page="pricing">Pricing</a></li>
+                <li><a href="#" onclick="showPage('about')" data-page="about">About</a></li>
+            </ul>
+            <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <a href="#" onclick="showPage('contact')" class="cta-button">Get Started</a>
+        </div>
+    </nav>
+
+    <!-- HOME PAGE -->
+    <div id="home-page" class="page-container active">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    AI Workflows with<br>
+                    <span class="gradient-text">Human in the Lead</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Empower your team with intelligent automation that amplifies human creativity and decision-making. 
+                    Build workflows where AI serves your vision, not the other way around.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#" onclick="showPage('contact')" class="btn-primary">Start Building</a>
+                    <a href="#" onclick="showPage('features')" class="btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+            <div class="container">
+                <h2 class="section-title fade-in">Human-Centric Automation</h2>
+                
+                <div class="features-grid">
+                    <div class="feature-card glass-blue fade-in">
+                        <div class="feature-icon" style="background: linear-gradient(135deg, var(--blue-primary), var(--blue-light));">🧠</div>
+                        <h3 class="feature-title">Intelligent Assistance</h3>
+                        <p class="feature-description">
+                            AI that learns your preferences and augments your decision-making process without replacing human judgment and creativity.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card glass-turquoise fade-in">
+                        <div class="feature-icon" style="background: linear-gradient(135deg, var(--turquoise-primary), var(--turquoise-light));">⚡</div>
+                        <h3 class="feature-title">Seamless Integration</h3>
+                        <p class="feature-description">
+                            Connect with your existing tools and workflows. Our platform adapts to your processes, not the other way around.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card glass-aubergine fade-in">
+                        <div class="feature-icon" style="background: linear-gradient(135deg, var(--aubergine-primary), var(--aubergine-light));">🎯</div>
+                        <h3 class="feature-title">Precise Control</h3>
+                        <p class="feature-description">
+                            Maintain full oversight and control over automated processes with transparent AI operations and human override capabilities.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item fade-in">
+                        <div class="stat-number">300%</div>
+                        <div class="stat-label">Productivity Increase</div>
+                    </div>
+                    <div class="stat-item fade-in">
+                        <div class="stat-number">50k+</div>
+                        <div class="stat-label">Active Users</div>
+                    </div>
+                    <div class="stat-item fade-in">
+                        <div class="stat-number">99.9%</div>
+                        <div class="stat-label">Uptime Reliability</div>
+                    </div>
+                    <div class="stat-item fade-in">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Human Support</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-container glass fade-in">
+                    <h2 class="cta-title">Ready to Transform Your Workflows?</h2>
+                    <p class="cta-description">
+                        Join thousands of teams who have revolutionized their productivity while keeping humans at the center of their operations.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#" onclick="showPage('contact')" class="btn-primary">Start Free Trial</a>
+                        <a href="#" onclick="showPage('pricing')" class="btn-secondary">View Pricing</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- FEATURES PAGE -->
+    <div id="features-page" class="page-container">
+        <div class="page-header">
+            <div class="container">
+                <h1 class="page-title">Powerful Features</h1>
+                <p class="page-description">
+                    Discover how WorkflowX empowers your team with intelligent automation while keeping humans in control.
+                </p>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <div class="container">
+                <div class="content-grid">
+                    <div class="content-card glass-blue">
+                        <h3 class="card-title">🤖 AI-Powered Automation</h3>
+                        <p class="card-description">
+                            Advanced machine learning algorithms that understand your business processes and automate repetitive tasks while learning from human feedback.
+                        </p>
+                    </div>
+                    
+                    <div class="content-card glass-turquoise">
+                        <h3 class="card-title">🔄 Workflow Builder</h3>
+                        <p class="card-description">
+                            Intuitive drag-and-drop interface for creating complex workflows. No coding required - design automation flows that match your thinking.
+                        </p>
+                    </div>
+                    
+                    <div class="content-card glass-aubergine">
+                        <h3 class="card-title">📊 Real-time Analytics</h3>
+                        <p class="card-description">
+                            Comprehensive dashboards and reports that provide insights into your automated processes and team productivity metrics.
+                        </p>
+                    </div>
+                    
+                    <div class="content-card glass">
+                        <h3 class="card-title">🔐 Enterprise Security</h3>
+                        <p class="card-description">
+                            Bank-level encryption, SOC 2 compliance, and advanced access controls to keep your data safe and secure.
+                        </p>
+                    </div>
+                    
+                    <div class="content-card glass-blue">
+                        <h3 class="card-title">🌐 API Integrations</h3>
+                        <p class="card-description">
+                            Connect with 1000+ apps and services. RESTful APIs and webhooks for custom integrations and data synchronization.
+                        </p>
+                    </div>
+                    
+                    <div class="content-card glass-turquoise">
+                        <h3 class="card-title">👥 Team Collaboration</h3>
+                        <p class="card-description">
+                            Built-in collaboration tools, role-based permissions, and shared workspaces for seamless team coordination.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SOLUTIONS PAGE -->
+    <div id="solutions-page" class="page-container">
+        <div class="page-header">
+            <div class="container">
+                <h1 class="page-title">Industry Solutions</h1>
+                <p class="page-description">
+                    Tailored automation solutions for every industry, designed to enhance human capabilities and drive business growth.
+                </p>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <div class="container">
+                <div class="content-grid">
+                    <div class="content-card glass-blue">
+                        <h3 class="card-title">🏢 Enterprise Operations</h3>
+                        <p class="card-description">
+                            Streamline complex business processes, automate document workflows, and enhance decision-making with AI-powered insights for large organizations.
+                        </p>
+                    </div>
+                    
+                    <div class="content-card glass-turquoise">
+                        <h3 class="card-title">🏥 Healthcare</h3>
+                        <p class="card-description">
+                            Automate patient data management, appointment scheduling, and administrative tasks while maintaining HIPAA compliance and human oversight.
+                        </p>
+                    </div>
+                    
+                    <div class="content-card glass-aubergine">
+                        <h3 class="card-title">💰 Financial Services</h3>
+                        <p class="card-description">
+                            Enhance risk assessment, automate compliance reporting, and streamline customer onboarding with intelligent automation solutions.
+                        </p>
+                    </div>
+                    
+                    <div class="content-card glass">
+                        <h3 class="card-title">🛒 E-commerce</h3>
+                        <p class="card-description">
+                            Optimize inventory management, automate customer service responses, and personalize shopping experiences with AI-driven recommendations.
+                        </p>
+                    </div>
+                    
+                    <div class="content-card glass-blue">
+                        <h3 class="card-title">🏭 Manufacturing</h3>
+                        <p class="card-description">
+                            Improve quality control, optimize supply chain operations, and predictive maintenance scheduling with intelligent automation.
+                        </p>
+                    </div>
+                    
+                    <div class="content-card glass-turquoise">
+                        <h3 class="card-title">🎓 Education</h3>
+                        <p class="card-description">
+                            Automate administrative tasks, personalize learning experiences, and enhance student engagement while supporting educators.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRICING PAGE -->
+    <div id="pricing-page" class="page-container">
+        <div class="page-header">
+            <div class="container">
+                <h1 class="page-title">Simple, Transparent Pricing</h1>
+                <p class="page-description">
+                    Choose the plan that fits your team size and automation needs. All plans include human oversight features.
+                </p>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <div class="container">
+                <div class="pricing-grid">
+                    <div class="pricing-card glass">
+                        <h3 class="plan-name">Starter</h3>
+                        <div class="plan-price">$29</div>
+                        <div class="plan-period">per user/month</div>
+                        <ul class="plan-features">
+                            <li>Up to 100 automated tasks/month</li>
+                            <li>Basic workflow builder</li>
+                            <li>5 integrations</li>
+                            <li>Email support</li>
+                            <li>Human oversight dashboard</li>
+                        </ul>
+                        <a href="#" onclick="showPage('contact')" class="btn-secondary">Get Started</a>
+                    </div>
+                    
+                    <div class="pricing-card glass-turquoise featured">
+                        <h3 class="plan-name">Professional</h3>
+                        <div class="plan-price">$99</div>
+                        <div class="plan-period">per user/month</div>
+                        <ul class="plan-features">
+                            <li>Unlimited automated tasks</li>
+                            <li>Advanced workflow builder</li>
+                            <li>Unlimited integrations</li>
+                            <li>Priority support</li>
+                            <li>Advanced analytics</li>
+                            <li>Team collaboration tools</li>
+                            <li>Custom AI training</li>
+                        </ul>
+                        <a href="#" onclick="showPage('contact')" class="btn-primary">Start Free Trial</a>
+                    </div>
+                    
+                    <div class="pricing-card glass-aubergine">
+                        <h3 class="plan-name">Enterprise</h3>
+                        <div class="plan-price">Custom</div>
+                        <div class="plan-period">contact for pricing</div>
+                        <ul class="plan-features">
+                            <li>Everything in Professional</li>
+                            <li>Dedicated account manager</li>
+                            <li>Custom integrations</li>
+                            <li>24/7 phone support</li>
+                            <li>On-premise deployment</li>
+                            <li>Advanced security features</li>
+                            <li>Custom SLA</li>
+                        </ul>
+                        <a href="#" onclick="showPage('contact')" class="btn-secondary">Contact Sales</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ABOUT PAGE -->
+    <div id="about-page" class="page-container">
+        <div class="page-header">
+            <div class="container">
+                <h1 class="page-title">About WorkflowX</h1>
+                <p class="page-description">
+                    We believe in a future where AI amplifies human potential rather than replacing it. Our mission is to create technology that serves humanity.
+                </p>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <div class="container">
+                <div class="content-grid">
+                    <div class="content-card glass-blue">
+                        <h3 class="card-title">🎯 Our Mission</h3>
+                        <p class="card-description">
+                            To democratize AI automation while ensuring humans remain at the center of every decision. We build tools that enhance human creativity and productivity.
+                        </p>
+                    </div>
+                    
+                    <div class="content-card glass-turquoise">
+                        <h3 class="card-title">🌟 Our Vision</h3>
+                        <p class="card-description">
+                            A world where intelligent automation empowers every professional to focus on what matters most - creativity, strategy, and human connection.
+                        </p>
+                    </div>
+                    
+                    <div class="content-card glass-aubergine">
+                        <h3 class="card-title">💡 Our Values</h3>
+                        <p class="card-description">
+                            Human-first design, transparent AI operations, ethical automation practices, and continuous learning from our community.
+                        </p>
+                    </div>
+                    
+                    <div class="content-card glass">
+                        <h3 class="card-title">🚀 Our Story</h3>
+                        <p class="card-description">
+                            Founded by a team of AI researchers and business leaders who experienced firsthand the need for human-centric automation solutions.
+                        </p>
+                    </div>
+                    
+                    <div class="content-card glass-blue">
+                        <h3 class="card-title">🏆 Our Achievements</h3>
+                        <p class="card-description">
+                            Trusted by 50,000+ professionals worldwide, recognized as a leader in ethical AI, and committed to responsible innovation.
+                        </p>
+                    </div>
+                    
+                    <div class="content-card glass-turquoise">
+                        <h3 class="card-title">🌍 Global Impact</h3>
+                        <p class="card-description">
+                            Helping organizations across 50+ countries transform their workflows while maintaining human dignity and decision-making authority.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTACT PAGE -->
+    <div id="contact-page" class="page-container">
+        <div class="page-header">
+            <div class="container">
+                <h1 class="page-title">Get in Touch</h1>
+                <p class="page-description">
+                    Ready to transform your workflows? Let's discuss how WorkflowX can help your team achieve more with human-led automation.
+                </p>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <div class="container">
+                <div class="contact-form glass">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Full Name *</label>
+                            <input type="text" id="name" name="name" class="form-input" placeholder="Enter your full name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email Address *</label>
+                            <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email address" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="company" class="form-label">Company</label>
+                            <input type="text" id="company" name="company" class="form-input" placeholder="Enter your company name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" class="form-input" placeholder="Enter your phone number">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="interest" class="form-label">I'm interested in *</label>
+                            <select id="interest" name="interest" class="form-input" required>
+                                <option value="">Select your interest</option>
+                                <option value="free-trial">Starting a free trial</option>
+                                <option value="demo">Scheduling a demo</option>
+                                <option value="enterprise">Enterprise solutions</option>
+                                <option value="partnership">Partnership opportunities</option>
+                                <option value="support">Technical support</option>
+                                <option value="other">Other inquiries</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message" class="form-label">Message *</label>
+                            <textarea id="message" name="message" class="form-textarea" placeholder="Tell us about your automation needs or ask any questions..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="form-submit" id="submitBtn">
+                            <span id="submitText">Send Message</span>
+                            <span id="submitSpinner" class="loading-spinner" style="display: none;"></span>
+                        </button>
+                        
+                        <div id="formMessage" class="form-message" style="display: none;"></div>
+                    </form>
+                </div>
+
+                <div class="content-grid" style="margin-top: 80px;">
+                    <div class="content-card glass-blue">
+                        <h3 class="card-title">📧 Email Us</h3>
+                        <p class="card-description">
+                            <strong>Sales:</strong> sales@workflowx.com<br>
+                            <strong>Support:</strong> support@workflowx.com<br>
+                            <strong>General:</strong> hello@workflowx.com
+                        </p>
+                    </div>
+                    
+                    <div class="content-card glass-turquoise">
+                        <h3 class="card-title">🌍 Global Offices</h3>
+                        <p class="card-description">
+                            <strong>San Francisco:</strong> 123 Tech Street, CA 94105<br>
+                            <strong>Berlin:</strong> Unter den Linden 1, 10117<br>
+                            <strong>Remote-first</strong> with worldwide support
+                        </p>
+                    </div>
+                    
+                    <div class="content-card glass-aubergine">
+                        <h3 class="card-title">🕒 Support Hours</h3>
+                        <p class="card-description">
+                            <strong>Chat Support:</strong> 24/7<br>
+                            <strong>Phone Support:</strong> Mon-Fri 9AM-6PM PST<br>
+                            <strong>Emergency:</strong> 24/7 for Enterprise customers
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">WorkflowX</div>
+                    <p class="footer-text">
+                        Empowering human potential through intelligent automation. AI workflows where humans lead and technology follows.
+                    </p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Product</h3>
+                    <ul>
+                        <li><a href="#" onclick="showPage('features')">Features</a></li>
+                        <li><a href="#" onclick="showPage('solutions')">Solutions</a></li>
+                        <li><a href="#" onclick="showPage('pricing')">Pricing</a></li>
+                        <li><a href="#">API Documentation</a></li>
+                        <li><a href="#">System Status</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#" onclick="showPage('about')">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press Kit</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Investors</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Community</a></li>
+                        <li><a href="#">Webinars</a></li>
+                        <li><a href="#">Case Studies</a></li>
+                        <li><a href="#">Templates</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Security</a></li>
+                        <li><a href="#">GDPR</a></li>
+                        <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 WorkflowX. All rights reserved. Human in the Lead™ is a trademark of WorkflowX Inc.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Global state management
+        let currentPage = 'home';
+        let mobileMenuOpen = false;
+
+        // Page navigation system
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page-container').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            const targetPage = document.getElementById(pageId + '-page');
+            if (targetPage) {
+                targetPage.classList.add('active');
+                currentPage = pageId;
+                
+                // Update navigation active state
+                document.querySelectorAll('.nav-links a').forEach(link => {
+                    link.classList.remove('active');
+                });
+                
+                const activeLink = document.querySelector(`[data-page="${pageId}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                }
+                
+                // Close mobile menu if open
+                if (mobileMenuOpen) {
+                    toggleMobileMenu();
+                }
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+                // Trigger animations for the new page
+                setTimeout(() => {
+                    triggerPageAnimations();
+                }, 100);
+            }
+        }
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navLinks = document.getElementById('navLinks');
+            const toggle = document.querySelector('.mobile-menu-toggle');
+            
+            mobileMenuOpen = !mobileMenuOpen;
+            
+            if (mobileMenuOpen) {
+                navLinks.classList.add('active');
+                toggle.classList.add('active');
+            } else {
+                navLinks.classList.remove('active');
+                toggle.classList.remove('active');
+            }
+        }
+
+        // Contact form handling
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const submitText = document.getElementById('submitText');
+            const submitSpinner = document.getElementById('submitSpinner');
+            const formMessage = document.getElementById('formMessage');
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            submitText.style.display = 'none';
+            submitSpinner.style.display = 'inline-block';
+            
+            // Collect form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            
+            try {
+                // Simulate API call (replace with actual endpoint)
+                await simulateFormSubmission(data);
+                
+                // Show success message
+                formMessage.className = 'form-message success';
+                formMessage.textContent = 'Thank you! Your message has been sent successfully. We\'ll get back to you within 24 hours.';
+                formMessage.style.display = 'block';
+                
+                // Reset form
+                this.reset();
+                
+            } catch (error) {
+                // Show error message
+                formMessage.className = 'form-message error';
+                formMessage.textContent = 'Sorry, there was an error sending your message. Please try again or email us directly.';
+                formMessage.style.display = 'block';
+            } finally {
+                // Reset button state
+                setTimeout(() => {
+                    submitBtn.disabled = false;
+                    submitText.style.display = 'inline';
+                    submitSpinner.style.display = 'none';
+                }, 500);
+            }
+        });
+
+        // Simulate form submission (replace with actual implementation)
+        function simulateFormSubmission(data) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    // Simulate success/failure (90% success rate)
+                    if (Math.random() > 0.1) {
+                        console.log('Form submitted:', data);
+                        resolve();
+                    } else {
+                        reject(new Error('Submission failed'));
+                    }
+                }, 2000);
+            });
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(10, 10, 10, 0.9)';
+                navbar.style.backdropFilter = 'blur(20px)';
+                navbar.style.transform = 'translateX(-50%) scale(0.95)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.1)';
+                navbar.style.backdropFilter = 'blur(20px)';
+                navbar.style.transform = 'translateX(-50%) scale(1)';
+            }
+        });
+
+        // Intersection Observer for animations
+        function createIntersectionObserver() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            return observer;
+        }
+
+        // Trigger animations for current page
+        function triggerPageAnimations() {
+            const observer = createIntersectionObserver();
+            
+            document.querySelectorAll('.fade-in').forEach(el => {
+                el.classList.remove('visible');
+                observer.observe(el);
+            });
+        }
+
+        // Stats counter animation
+        function animateCounter(element, target, duration = 2000) {
+            let start = 0;
+            const increment = target / (duration / 16);
+            
+            const timer = setInterval(() => {
+                start += increment;
+                if (start >= target) {
+                    element.textContent = target + (element.textContent.includes('%') ? '%' : 
+                                                  element.textContent.includes('+') ? '+' : '');
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(start) + (element.textContent.includes('%') ? '%' : 
+                                                             element.textContent.includes('+') ? '+' : '');
+                }
+            }, 16);
+        }
+
+        // Trigger counter animations when stats section is visible
+        function initStatsCounters() {
+            const statsObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const statNumbers = entry.target.querySelectorAll('.stat-number');
+                        statNumbers.forEach(stat => {
+                            const text = stat.textContent;
+                            let target = parseInt(text.replace(/[^\d]/g, ''));
+                            
+                            if (text.includes('300%')) target = 300;
+                            else if (text.includes('50k+')) target = 50;
+                            else if (text.includes('99.9%')) target = 99.9;
+                            else if (text.includes('24/7')) {
+                                stat.textContent = '24/7';
+                                return;
+                            }
+                            
+                            stat.textContent = '0' + (text.includes('%') ? '%' : text.includes('+') ? '+' : '');
+                            animateCounter(stat, target);
+                        });
+                        statsObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            const statsSection = document.querySelector('.stats');
+            if (statsSection) {
+                statsObserver.observe(statsSection);
+            }
+        }
+
+        // Parallax effect for background
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.bg-gradient');
+            const speed = scrolled * 0.5;
+            parallax.style.transform = `translate3d(0, ${speed}px, 0)`;
+        });
+
+        // Interactive button effects
+        function initButtonEffects() {
+            document.querySelectorAll('.btn-primary, .btn-secondary, .cta-button').forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px) scale(1.05)';
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+                
+                button.addEventListener('mousedown', function() {
+                    this.style.transform = 'translateY(0) scale(0.98)';
+                });
+                
+                button.addEventListener('mouseup', function() {
+                    this.style.transform = 'translateY(-3px) scale(1.05)';
+                });
+            });
+        }
+
+        // Feature card hover effects
+        function initCardEffects() {
+            document.querySelectorAll('.feature-card, .content-card, .pricing-card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-15px) rotateX(5deg)';
+                    this.style.boxShadow = '0 20px 60px rgba(0, 0, 0, 0.3)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) rotateX(0deg)';
+                    this.style.boxShadow = 'none';
+                });
+            });
+        }
+
+        // Dynamic particle creation
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 6 + 's';
+            
+            const colors = ['var(--blue-primary)', 'var(--turquoise-primary)', 'var(--aubergine-primary)'];
+            particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+            
+            document.body.appendChild(particle);
+            
+            setTimeout(() => {
+                if (particle.parentNode) {
+                    particle.remove();
+                }
+            }, 6000);
+        }
+
+        // Create new particles periodically
+        setInterval(createParticle, 3000);
+
+        // Mouse movement parallax effect
+        document.addEventListener('mousemove', (e) => {
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+            
+            document.querySelectorAll('.feature-card, .content-card').forEach((card, index) => {
+                const intensity = (index + 1) * 0.5;
+                const x = (mouseX - 0.5) * intensity;
+                const y = (mouseY - 0.5) * intensity;
+                
+                card.style.transform += ` translate3d(${x}px, ${y}px, 0)`;
+            });
+        });
+
+        // Add ripple effect to buttons
+        function createRipple(event) {
+            const button = event.currentTarget;
+            const circle = document.createElement('span');
+            const diameter = Math.max(button.clientWidth, button.clientHeight);
+            const radius = diameter / 2;
+
+            circle.style.width = circle.style.height = `${diameter}px`;
+            circle.style.left = `${event.clientX - button.offsetLeft - radius}px`;
+            circle.style.top = `${event.clientY - button.offsetTop - radius}px`;
+            circle.classList.add('ripple');
+
+            const ripple = button.getElementsByClassName('ripple')[0];
+            if (ripple) {
+                ripple.remove();
+            }
+
+            button.appendChild(circle);
+        }
+
+        // Add ripple effect styles
+        const rippleStyle = document.createElement('style');
+        rippleStyle.textContent = `
+            .ripple {
+                position: absolute;
+                border-radius: 50%;
+                transform: scale(0);
+                animation: ripple 600ms linear;
+                background-color: rgba(255, 255, 255, 0.3);
+                pointer-events: none;
+            }
+
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(rippleStyle);
+
+        // Apply ripple effect to all buttons
+        function initRippleEffects() {
+            document.querySelectorAll('.btn-primary, .btn-secondary, .cta-button, .form-submit').forEach(button => {
+                button.addEventListener('click', createRipple);
+            });
+        }
+
+        // Smooth reveal animations with stagger
+        function staggerAnimation(elements, delay = 100) {
+            elements.forEach((element, index) => {
+                setTimeout(() => {
+                    element.classList.add('visible');
+                }, index * delay);
+            });
+        }
+
+        // Enhanced intersection observer for staggered animations
+        function initStaggeredAnimations() {
+            const staggerObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        if (entry.target.classList.contains('features-grid')) {
+                            const cards = entry.target.querySelectorAll('.feature-card');
+                            staggerAnimation(cards, 200);
+                        } else if (entry.target.classList.contains('content-grid')) {
+                            const cards = entry.target.querySelectorAll('.content-card');
+                            staggerAnimation(cards, 150);
+                        } else if (entry.target.classList.contains('pricing-grid')) {
+                            const cards = entry.target.querySelectorAll('.pricing-card');
+                            staggerAnimation(cards, 200);
+                        } else if (entry.target.classList.contains('stats-grid')) {
+                            const stats = entry.target.querySelectorAll('.stat-item');
+                            staggerAnimation(stats, 150);
+                        }
+                        staggerObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            // Observe grid containers for staggered animations
+            document.querySelectorAll('.features-grid, .content-grid, .pricing-grid, .stats-grid').forEach(grid => {
+                staggerObserver.observe(grid);
+            });
+        }
+
+        // Add custom cursor effect
+        function initCustomCursor() {
+            const cursor = document.createElement('div');
+            cursor.className = 'custom-cursor';
+            document.body.appendChild(cursor);
+
+            const cursorStyle = document.createElement('style');
+            cursorStyle.textContent = `
+                .custom-cursor {
+                    position: fixed;
+                    width: 20px;
+                    height: 20px;
+                    background: radial-gradient(circle, var(--turquoise-primary), var(--blue-primary));
+                    border-radius: 50%;
+                    pointer-events: none;
+                    mix-blend-mode: difference;
+                    z-index: 9999;
+                    transition: transform 0.1s ease;
+                    opacity: 0;
+                }
+
+                .custom-cursor.active {
+                    opacity: 1;
+                    transform: scale(1.5);
+                }
+
+                .custom-cursor.click {
+                    transform: scale(0.8);
+                }
+
+                @media (max-width: 768px) {
+                    .custom-cursor {
+                        display: none;
+                    }
+                }
+            `;
+            document.head.appendChild(cursorStyle);
+
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX - 10 + 'px';
+                cursor.style.top = e.clientY - 10 + 'px';
+                cursor.classList.add('active');
+            });
+
+            document.addEventListener('mousedown', () => {
+                cursor.classList.add('click');
+            });
+
+            document.addEventListener('mouseup', () => {
+                cursor.classList.remove('click');
+            });
+
+            document.addEventListener('mouseleave', () => {
+                cursor.classList.remove('active');
+            });
+        }
+
+        // Form validation
+        function initFormValidation() {
+            const form = document.getElementById('contactForm');
+            const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
+            
+            inputs.forEach(input => {
+                input.addEventListener('blur', validateField);
+                input.addEventListener('input', clearFieldError);
+            });
+        }
+
+        function validateField(event) {
+            const field = event.target;
+            const value = field.value.trim();
+            
+            // Remove existing error styling
+            field.style.borderColor = '';
+            
+            if (field.hasAttribute('required') && !value) {
+                field.style.borderColor = 'var(--error)';
+                return false;
+            }
+            
+            if (field.type === 'email' && value) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(value)) {
+                    field.style.borderColor = 'var(--error)';
+                    return false;
+                }
+            }
+            
+            field.style.borderColor = 'var(--success)';
+            return true;
+        }
+
+        function clearFieldError(event) {
+            const field = event.target;
+            if (field.style.borderColor === 'var(--error)') {
+                field.style.borderColor = '';
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            // ESC key closes mobile menu
+            if (e.key === 'Escape' && mobileMenuOpen) {
+                toggleMobileMenu();
+            }
+            
+            // Tab navigation enhancement
+            if (e.key === 'Tab') {
+                document.body.classList.add('keyboard-navigation');
+            }
+        });
+
+        document.addEventListener('mousedown', () => {
+            document.body.classList.remove('keyboard-navigation');
+        });
+
+        // Add keyboard navigation styles
+        const keyboardStyle = document.createElement('style');
+        keyboardStyle.textContent = `
+            .keyboard-navigation *:focus {
+                outline: 2px solid var(--turquoise-primary);
+                outline-offset: 2px;
+            }
+        `;
+        document.head.appendChild(keyboardStyle);
+
+        // Performance optimization: throttle scroll events
+        function throttle(func, limit) {
+            let inThrottle;
+            return function() {
+                const args = arguments;
+                const context = this;
+                if (!inThrottle) {
+                    func.apply(context, args);
+                    inThrottle = true;
+                    setTimeout(() => inThrottle = false, limit);
+                }
+            }
+        }
+
+        // Initialize all features
+        function initializeWebsite() {
+            // Set initial active navigation
+            const homeLink = document.querySelector('[data-page="home"]');
+            if (homeLink) {
+                homeLink.classList.add('active');
+            }
+            
+            // Initialize all interactive features
+            triggerPageAnimations();
+            initStatsCounters();
+            initButtonEffects();
+            initCardEffects();
+            initRippleEffects();
+            initStaggeredAnimations();
+            initCustomCursor();
+            initFormValidation();
+            
+            console.log('🚀 WorkflowX Website - Human in the Lead - Fully Loaded');
+        }
+
+        // Website ready event
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeWebsite);
+        } else {
+            initializeWebsite();
+        }
+
+        // Loading animation
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+
+        // Error handling for failed resources
+        window.addEventListener('error', (e) => {
+            console.warn('Resource failed to load:', e.target);
+        });
+
+        // Service Worker registration (for PWA capabilities)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+
+        // Analytics placeholder (replace with actual analytics)
+        function trackPageView(page) {
+            console.log(`Page view: ${page}`);
+            // Replace with actual analytics tracking
+            // gtag('config', 'GA_TRACKING_ID', { page_title: page });
+        }
+
+        // Track initial page load
+        trackPageView('home');
+
+        // Override showPage to include analytics
+        const originalShowPage = showPage;
+        showPage = function(pageId) {
+            originalShowPage(pageId);
+            trackPageView(pageId);
+        };
+    </script>
+</body>
+</html>
