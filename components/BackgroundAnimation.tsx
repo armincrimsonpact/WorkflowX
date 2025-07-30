@@ -3,106 +3,106 @@
 import { useEffect, useState } from 'react';
 
 export default function BackgroundAnimation() {
-  const [particles, setParticles] = useState<Array<{ id: number; x: number; y: number; delay: number; color: string; size: number }>>([]);
+  const [stars, setStars] = useState<Array<{ id: number; x: number; y: number; size: number; opacity: number }>>([]);
 
   useEffect(() => {
-    // Create initial particles with varying sizes
-    const initialParticles = Array.from({ length: 15 }, (_, i) => ({
+    // Create initial stars
+    const initialStars = Array.from({ length: 50 }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,
-      delay: Math.random() * 8,
-      color: ['bg-turquoise-primary', 'bg-blue-primary', 'bg-aubergine-primary', 'bg-purple-500', 'bg-pink-500'][Math.floor(Math.random() * 5)],
-      size: Math.random() * 0.6 + 0.3 // Increased opacity for better visibility
+      size: Math.random() * 3 + 1,
+      opacity: Math.random() * 0.8 + 0.2
     }));
-    setParticles(initialParticles);
+    setStars(initialStars);
 
-    // Create new particles periodically
+    // Add new stars periodically
     const interval = setInterval(() => {
-      const newParticle = {
+      const newStar = {
         id: Date.now(),
         x: Math.random() * 100,
         y: Math.random() * 100,
-        delay: Math.random() * 8,
-        color: ['bg-turquoise-primary', 'bg-blue-primary', 'bg-aubergine-primary', 'bg-purple-500', 'bg-pink-500'][Math.floor(Math.random() * 5)],
-        size: Math.random() * 0.6 + 0.3
+        size: Math.random() * 3 + 1,
+        opacity: Math.random() * 0.8 + 0.2
       };
-      setParticles(prev => [...prev, newParticle]);
+      setStars(prev => [...prev, newStar]);
 
-      // Remove particle after 8 seconds
+      // Remove star after 10 seconds
       setTimeout(() => {
-        setParticles(prev => prev.filter(p => p.id !== newParticle.id));
-      }, 8000);
-    }, 1500); // More frequent particles
+        setStars(prev => prev.filter(s => s.id !== newStar.id));
+      }, 10000);
+    }, 1000);
 
     return () => clearInterval(interval);
   }, []);
 
   return (
     <>
-      {/* Multi-layered rotating background */}
+      {/* Space-themed rotating background */}
       <div className="fixed inset-0 -z-10 overflow-hidden">
-        {/* Primary rotating gradient - more prominent */}
+        {/* Primary rotating space gradient */}
         <div 
-          className="absolute w-[250%] h-[250%] bg-gradient-to-r from-blue-primary/60 via-turquoise-primary/50 to-aubergine-primary/60 animate-spin"
+          className="absolute w-[300%] h-[200%] bg-gradient-to-r from-blue-900/40 via-purple-900/30 to-indigo-900/40 animate-spin"
           style={{ 
-            animationDuration: '25s',
-            left: '-75%',
-            top: '-75%'
-          }}
-        />
-        
-        {/* Secondary counter-rotating gradient */}
-        <div 
-          className="absolute w-[200%] h-[200%] bg-gradient-to-br from-purple-500/40 via-pink-500/30 to-blue-primary/40 animate-spin"
-          style={{ 
-            animationDuration: '20s',
-            animationDirection: 'reverse',
-            left: '-50%',
+            animationDuration: '30s',
+            left: '-100%',
             top: '-50%'
           }}
         />
         
-        {/* Tertiary slow rotating gradient */}
+        {/* Secondary counter-rotating nebula effect */}
         <div 
-          className="absolute w-[220%] h-[220%] bg-gradient-to-tl from-turquoise-primary/35 via-aubergine-primary/30 to-purple-500/35 animate-spin"
+          className="absolute w-[250%] h-[150%] bg-gradient-to-br from-pink-900/30 via-purple-800/20 to-blue-900/30 animate-spin"
           style={{ 
-            animationDuration: '30s',
-            left: '-60%',
-            top: '-60%'
+            animationDuration: '25s',
+            animationDirection: 'reverse',
+            left: '-75%',
+            top: '-25%'
           }}
         />
         
-        {/* Additional rotating layer for more depth */}
+        {/* Tertiary slow rotating cosmic dust */}
         <div 
-          className="absolute w-[180%] h-[180%] bg-gradient-to-bl from-pink-500/25 via-blue-primary/20 to-turquoise-primary/25 animate-spin"
+          className="absolute w-[280%] h-[180%] bg-gradient-to-tl from-cyan-900/25 via-blue-800/20 to-indigo-900/25 animate-spin"
           style={{ 
-            animationDuration: '18s',
-            animationDirection: 'reverse',
-            left: '-40%',
+            animationDuration: '35s',
+            left: '-90%',
             top: '-40%'
           }}
         />
         
-        {/* Radial gradient overlay - less opaque to show more background */}
-        <div className="absolute inset-0 bg-radial-gradient from-transparent via-bg-black/30 to-bg-black/60" />
-      </div>
-
-      {/* Enhanced floating particles */}
-      {particles.map((particle) => (
-        <div
-          key={particle.id}
-          className={`particle ${particle.color} rounded-full blur-sm`}
-          style={{
-            left: `${particle.x}%`,
-            top: `${particle.y}%`,
-            animationDelay: `${particle.delay}s`,
-            opacity: particle.size,
-            width: `${Math.random() * 300 + 150}px`, // Larger particles
-            height: `${Math.random() * 300 + 150}px`,
+        {/* Additional cosmic layer */}
+        <div 
+          className="absolute w-[200%] h-[120%] bg-gradient-to-bl from-violet-900/20 via-purple-800/15 to-blue-900/20 animate-spin"
+          style={{ 
+            animationDuration: '20s',
+            animationDirection: 'reverse',
+            left: '-50%',
+            top: '-10%'
           }}
         />
-      ))}
+        
+        {/* Stars overlay */}
+        <div className="absolute inset-0">
+          {stars.map((star) => (
+            <div
+              key={star.id}
+              className="absolute bg-white rounded-full animate-pulse"
+              style={{
+                left: `${star.x}%`,
+                top: `${star.y}%`,
+                width: `${star.size}px`,
+                height: `${star.size}px`,
+                opacity: star.opacity,
+                animationDuration: `${Math.random() * 3 + 2}s`
+              }}
+            />
+          ))}
+        </div>
+        
+        {/* Space atmosphere overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/40" />
+      </div>
     </>
   );
 } 
