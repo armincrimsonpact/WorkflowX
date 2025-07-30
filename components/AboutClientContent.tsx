@@ -9,6 +9,7 @@ import {
   Globe
 } from 'lucide-react';
 import React from 'react';
+import { getHoverColorClass } from '@/components/utils/colorUtils';
 
 type Value = {
   icon: string;
@@ -135,10 +136,11 @@ export default function AboutClientContent({ values, milestones, team, stats }: 
           >
             {values.map((value, index) => {
               const IconComponent = iconMap[value.icon as keyof typeof iconMap];
+              const hoverColorClass = getHoverColorClass(value.gradient);
               return (
                 <motion.div
                   key={value.title}
-                  className="glass p-8 rounded-2xl cursor-pointer rotating-border"
+                  className={`glass p-8 rounded-2xl cursor-pointer ${hoverColorClass}`}
                   variants={itemVariants}
                   whileHover="hover"
                   whileTap={{ scale: 0.98 }}

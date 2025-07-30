@@ -6,24 +6,24 @@ export default function BackgroundAnimation() {
   const [stars, setStars] = useState<Array<{ id: number; x: number; y: number; size: number; opacity: number }>>([]);
 
   useEffect(() => {
-    // Create initial stars
-    const initialStars = Array.from({ length: 50 }, (_, i) => ({
+    // Create initial stars - reduced for less distraction
+    const initialStars = Array.from({ length: 20 }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,
-      size: Math.random() * 3 + 1,
-      opacity: Math.random() * 0.8 + 0.2
+      size: Math.random() * 2 + 0.5, // Smaller stars
+      opacity: Math.random() * 0.4 + 0.1 // Lower opacity
     }));
     setStars(initialStars);
 
-    // Add new stars periodically
+    // Add new stars periodically - less frequent
     const interval = setInterval(() => {
       const newStar = {
         id: Date.now(),
         x: Math.random() * 100,
         y: Math.random() * 100,
-        size: Math.random() * 3 + 1,
-        opacity: Math.random() * 0.8 + 0.2
+        size: Math.random() * 2 + 0.5,
+        opacity: Math.random() * 0.4 + 0.1
       };
       setStars(prev => [...prev, newStar]);
 
@@ -31,58 +31,68 @@ export default function BackgroundAnimation() {
       setTimeout(() => {
         setStars(prev => prev.filter(s => s.id !== newStar.id));
       }, 10000);
-    }, 1000);
+    }, 2000); // Less frequent star generation
 
     return () => clearInterval(interval);
   }, []);
 
   return (
     <>
-      {/* Space-themed rotating background */}
+      {/* Prominent rotating background - the main attraction */}
       <div className="fixed inset-0 -z-10 overflow-hidden">
-        {/* Primary rotating space gradient */}
+        {/* Primary large rotating gradient - MAIN ATTRACTION */}
         <div 
-          className="absolute w-[300%] h-[200%] bg-gradient-to-r from-blue-900/40 via-purple-900/30 to-indigo-900/40 animate-spin"
+          className="absolute w-[400%] h-[300%] bg-gradient-to-r from-blue-600/80 via-purple-600/70 to-indigo-600/80 animate-spin"
+          style={{ 
+            animationDuration: '25s',
+            left: '-150%',
+            top: '-100%'
+          }}
+        />
+        
+        {/* Secondary prominent counter-rotating gradient */}
+        <div 
+          className="absolute w-[350%] h-[250%] bg-gradient-to-br from-pink-600/70 via-purple-500/60 to-blue-600/70 animate-spin"
+          style={{ 
+            animationDuration: '20s',
+            animationDirection: 'reverse',
+            left: '-125%',
+            top: '-75%'
+          }}
+        />
+        
+        {/* Third prominent rotating layer */}
+        <div 
+          className="absolute w-[380%] h-[280%] bg-gradient-to-tl from-cyan-600/65 via-blue-500/55 to-indigo-600/65 animate-spin"
           style={{ 
             animationDuration: '30s',
+            left: '-140%',
+            top: '-90%'
+          }}
+        />
+        
+        {/* Fourth prominent layer */}
+        <div 
+          className="absolute w-[300%] h-[200%] bg-gradient-to-bl from-violet-600/60 via-purple-500/50 to-blue-600/60 animate-spin"
+          style={{ 
+            animationDuration: '18s',
+            animationDirection: 'reverse',
             left: '-100%',
             top: '-50%'
           }}
         />
         
-        {/* Secondary counter-rotating nebula effect */}
+        {/* Fifth layer for extra depth */}
         <div 
-          className="absolute w-[250%] h-[150%] bg-gradient-to-br from-pink-900/30 via-purple-800/20 to-blue-900/30 animate-spin"
+          className="absolute w-[320%] h-[220%] bg-gradient-to-tr from-emerald-600/55 via-teal-500/45 to-cyan-600/55 animate-spin"
           style={{ 
-            animationDuration: '25s',
-            animationDirection: 'reverse',
-            left: '-75%',
-            top: '-25%'
+            animationDuration: '22s',
+            left: '-110%',
+            top: '-60%'
           }}
         />
         
-        {/* Tertiary slow rotating cosmic dust */}
-        <div 
-          className="absolute w-[280%] h-[180%] bg-gradient-to-tl from-cyan-900/25 via-blue-800/20 to-indigo-900/25 animate-spin"
-          style={{ 
-            animationDuration: '35s',
-            left: '-90%',
-            top: '-40%'
-          }}
-        />
-        
-        {/* Additional cosmic layer */}
-        <div 
-          className="absolute w-[200%] h-[120%] bg-gradient-to-bl from-violet-900/20 via-purple-800/15 to-blue-900/20 animate-spin"
-          style={{ 
-            animationDuration: '20s',
-            animationDirection: 'reverse',
-            left: '-50%',
-            top: '-10%'
-          }}
-        />
-        
-        {/* Stars overlay */}
+        {/* Stars overlay - reduced for less distraction */}
         <div className="absolute inset-0">
           {stars.map((star) => (
             <div
@@ -93,15 +103,15 @@ export default function BackgroundAnimation() {
                 top: `${star.y}%`,
                 width: `${star.size}px`,
                 height: `${star.size}px`,
-                opacity: star.opacity,
+                opacity: star.opacity * 0.6, // Reduced opacity
                 animationDuration: `${Math.random() * 3 + 2}s`
               }}
             />
           ))}
         </div>
         
-        {/* Space atmosphere overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/40" />
+        {/* Minimal atmosphere overlay - reduced to show more of the rotating gradients */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/10 to-black/25" />
       </div>
     </>
   );

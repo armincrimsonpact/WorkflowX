@@ -19,6 +19,7 @@ import {
   Lock
 } from 'lucide-react';
 import React from 'react';
+import { getHoverColorClass } from '@/components/utils/colorUtils';
 
 type Feature = {
   icon: string;
@@ -141,10 +142,11 @@ export default function FeaturesClientContent({ features, additionalFeatures }: 
           >
             {features.map((feature, index) => {
               const IconComponent = iconMap[feature.icon as keyof typeof iconMap];
+              const hoverColorClass = getHoverColorClass(feature.gradient);
               return (
                 <motion.div
                   key={feature.title}
-                  className="glass p-8 rounded-2xl cursor-pointer rotating-border"
+                  className={`glass p-8 rounded-2xl cursor-pointer ${hoverColorClass}`}
                   variants={itemVariants}
                   whileHover="hover"
                   whileTap={{ scale: 0.98 }}

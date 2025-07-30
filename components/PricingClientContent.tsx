@@ -2,6 +2,7 @@
 import { motion } from 'framer-motion';
 import { Check, Star } from 'lucide-react';
 import React from 'react';
+import { getHoverColorClass } from '@/components/utils/colorUtils';
 
 type Plan = {
   name: string;
@@ -102,89 +103,92 @@ export default function PricingClientContent({ plans, faqs }: Props) {
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
           >
-            {plans.map((plan, index) => (
-              <motion.div
-                key={plan.name}
-                className={`relative p-8 rounded-2xl cursor-pointer rotating-border ${
-                  plan.popular ? 'glass-turquoise border-2 border-turquoise-primary' : 'glass'
-                }`}
-                variants={itemVariants}
-                whileHover="hover"
-                whileTap={{ scale: 0.98 }}
-                custom={index}
-              >
+            {plans.map((plan, index) => {
+              const hoverColorClass = getHoverColorClass(plan.gradient);
+              return (
                 <motion.div
-                  variants={cardHoverVariants}
-                  className="h-full"
+                  key={plan.name}
+                  className={`relative p-8 rounded-2xl cursor-pointer ${hoverColorClass} ${
+                    plan.popular ? 'glass-turquoise border-2 border-turquoise-primary' : 'glass'
+                  }`}
+                  variants={itemVariants}
+                  whileHover="hover"
+                  whileTap={{ scale: 0.98 }}
+                  custom={index}
                 >
-                  {plan.popular && (
-                    <motion.div 
-                      className="absolute -top-4 left-1/2 transform -translate-x-1/2"
-                      initial={{ opacity: 0, y: -20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.5 + index * 0.1 }}
-                    >
-                      <div className="bg-gradient-to-r from-turquoise-primary to-blue-primary text-white px-6 py-2 rounded-full text-sm font-semibold flex items-center gap-2 shadow-lg">
-                        <Star className="w-4 h-4" />
-                        Most Popular
-                      </div>
-                    </motion.div>
-                  )}
-                  <div className="text-center mb-8">
-                    <motion.h3 
-                      className="text-2xl font-bold mb-2 text-white"
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      {plan.name}
-                    </motion.h3>
-                    <div className="mb-4">
-                      <motion.span 
-                        className="text-4xl font-bold gradient-text"
-                        whileHover={{ scale: 1.1 }}
+                  <motion.div
+                    variants={cardHoverVariants}
+                    className="h-full"
+                  >
+                    {plan.popular && (
+                      <motion.div 
+                        className="absolute -top-4 left-1/2 transform -translate-x-1/2"
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.5 + index * 0.1 }}
+                      >
+                        <div className="bg-gradient-to-r from-turquoise-primary to-blue-primary text-white px-6 py-2 rounded-full text-sm font-semibold flex items-center gap-2 shadow-lg">
+                          <Star className="w-4 h-4" />
+                          Most Popular
+                        </div>
+                      </motion.div>
+                    )}
+                    <div className="text-center mb-8">
+                      <motion.h3 
+                        className="text-2xl font-bold mb-2 text-white"
+                        whileHover={{ scale: 1.05 }}
                         transition={{ duration: 0.2 }}
                       >
-                        {plan.price}
-                      </motion.span>
-                      <span className="text-gray-medium ml-2">{plan.period}</span>
-                    </div>
-                    <p className="text-gray-medium">{plan.description}</p>
-                  </div>
-                  <ul className="space-y-4 mb-8">
-                    {plan.features.map((feature, featureIndex) => (
-                      <motion.li 
-                        key={feature} 
-                        className="flex items-start gap-3"
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.8 + index * 0.1 + featureIndex * 0.05 }}
-                      >
-                        <motion.div
-                          whileHover={{ scale: 1.2, rotate: 360 }}
-                          transition={{ duration: 0.3 }}
+                        {plan.name}
+                      </motion.h3>
+                      <div className="mb-4">
+                        <motion.span 
+                          className="text-4xl font-bold gradient-text"
+                          whileHover={{ scale: 1.1 }}
+                          transition={{ duration: 0.2 }}
                         >
-                          <Check className="w-5 h-5 text-success mt-0.5 flex-shrink-0" />
-                        </motion.div>
-                        <span className="text-gray-medium">{feature}</span>
-                      </motion.li>
-                    ))}
-                  </ul>
-                  <motion.a 
-                    href="/contact" 
-                    className={`w-full text-center py-4 px-6 rounded-xl font-semibold block ${
-                      plan.popular 
-                        ? 'bg-gradient-to-r from-turquoise-primary to-blue-primary text-white hover:shadow-xl hover:shadow-turquoise-primary/40' 
-                        : 'border-2 border-aubergine-primary text-aubergine-light hover:bg-aubergine-primary hover:text-white'
-                    }`}
-                    variants={buttonHoverVariants}
-                    whileHover="hover"
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    {plan.name === 'Enterprise' ? 'Contact Sales' : 'Get Started'}
-                  </motion.a>
+                          {plan.price}
+                        </motion.span>
+                        <span className="text-gray-medium ml-2">{plan.period}</span>
+                      </div>
+                      <p className="text-gray-medium">{plan.description}</p>
+                    </div>
+                    <ul className="space-y-4 mb-8">
+                      {plan.features.map((feature, featureIndex) => (
+                        <motion.li 
+                          key={feature} 
+                          className="flex items-start gap-3"
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.8 + index * 0.1 + featureIndex * 0.05 }}
+                        >
+                          <motion.div
+                            whileHover={{ scale: 1.2, rotate: 360 }}
+                            transition={{ duration: 0.3 }}
+                          >
+                            <Check className="w-5 h-5 text-success mt-0.5 flex-shrink-0" />
+                          </motion.div>
+                          <span className="text-gray-medium">{feature}</span>
+                        </motion.li>
+                      ))}
+                    </ul>
+                    <motion.a 
+                      href="/contact" 
+                      className={`w-full text-center py-4 px-6 rounded-xl font-semibold block ${
+                        plan.popular 
+                          ? 'bg-gradient-to-r from-turquoise-primary to-blue-primary text-white hover:shadow-xl hover:shadow-turquoise-primary/40' 
+                          : 'border-2 border-aubergine-primary text-aubergine-light hover:bg-aubergine-primary hover:text-white'
+                      }`}
+                      variants={buttonHoverVariants}
+                      whileHover="hover"
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      {plan.name === 'Enterprise' ? 'Contact Sales' : 'Get Started'}
+                    </motion.a>
+                  </motion.div>
                 </motion.div>
-              </motion.div>
-            ))}
+              );
+            })}
           </motion.div>
         </div>
       </section>
@@ -283,4 +287,4 @@ export default function PricingClientContent({ plans, faqs }: Props) {
       </section>
     </>
   );
-}
+} 

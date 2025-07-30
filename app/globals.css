@@ -207,8 +207,9 @@ body {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s ease;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.6s ease;
+  z-index: 1;
 }
 
 .laser-hover:hover::before {
@@ -216,8 +217,120 @@ body {
 }
 
 .laser-hover:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Dynamic Color-Based Hover Effects */
+.laser-hover-blue {
+  --hover-color: #3b82f6;
+  --hover-color-light: rgba(59, 130, 246, 0.2);
+  --hover-color-border: rgba(59, 130, 246, 0.4);
+  --hover-shadow: rgba(59, 130, 246, 0.3);
+}
+
+.laser-hover-red {
+  --hover-color: #ef4444;
+  --hover-color-light: rgba(239, 68, 68, 0.2);
+  --hover-color-border: rgba(239, 68, 68, 0.4);
+  --hover-shadow: rgba(239, 68, 68, 0.3);
+}
+
+.laser-hover-green {
+  --hover-color: #10b981;
+  --hover-color-light: rgba(16, 185, 129, 0.2);
+  --hover-color-border: rgba(16, 185, 129, 0.4);
+  --hover-shadow: rgba(16, 185, 129, 0.3);
+}
+
+.laser-hover-purple {
+  --hover-color: #8b5cf6;
+  --hover-color-light: rgba(139, 92, 246, 0.2);
+  --hover-color-border: rgba(139, 92, 246, 0.4);
+  --hover-shadow: rgba(139, 92, 246, 0.3);
+}
+
+.laser-hover-orange {
+  --hover-color: #f97316;
+  --hover-color-light: rgba(249, 115, 22, 0.2);
+  --hover-color-border: rgba(249, 115, 22, 0.4);
+  --hover-shadow: rgba(249, 115, 22, 0.3);
+}
+
+.laser-hover-indigo {
+  --hover-color: #6366f1;
+  --hover-color-light: rgba(99, 102, 241, 0.2);
+  --hover-color-border: rgba(99, 102, 241, 0.4);
+  --hover-shadow: rgba(99, 102, 241, 0.3);
+}
+
+.laser-hover-turquoise {
+  --hover-color: #06b6d4;
+  --hover-color-light: rgba(6, 182, 212, 0.2);
+  --hover-color-border: rgba(6, 182, 212, 0.4);
+  --hover-shadow: rgba(6, 182, 212, 0.3);
+}
+
+.laser-hover-pink {
+  --hover-color: #ec4899;
+  --hover-color-light: rgba(236, 72, 153, 0.2);
+  --hover-color-border: rgba(236, 72, 153, 0.4);
+  --hover-shadow: rgba(236, 72, 153, 0.3);
+}
+
+.laser-hover-emerald {
+  --hover-color: #059669;
+  --hover-color-light: rgba(5, 150, 105, 0.2);
+  --hover-color-border: rgba(5, 150, 105, 0.4);
+  --hover-shadow: rgba(5, 150, 105, 0.3);
+}
+
+.laser-hover-violet {
+  --hover-color: #7c3aed;
+  --hover-color-light: rgba(124, 58, 237, 0.2);
+  --hover-color-border: rgba(124, 58, 237, 0.4);
+  --hover-shadow: rgba(124, 58, 237, 0.3);
+}
+
+.laser-hover-amber {
+  --hover-color: #d97706;
+  --hover-color-light: rgba(217, 119, 6, 0.2);
+  --hover-color-border: rgba(217, 119, 6, 0.4);
+  --hover-shadow: rgba(217, 119, 6, 0.3);
+}
+
+/* Apply color-based hover effects */
+.laser-hover-blue:hover,
+.laser-hover-red:hover,
+.laser-hover-green:hover,
+.laser-hover-purple:hover,
+.laser-hover-orange:hover,
+.laser-hover-indigo:hover,
+.laser-hover-turquoise:hover,
+.laser-hover-pink:hover,
+.laser-hover-emerald:hover,
+.laser-hover-violet:hover,
+.laser-hover-amber:hover {
+  background: var(--hover-color-light) !important;
+  border-color: var(--hover-color-border) !important;
+  box-shadow: 0 12px 30px var(--hover-shadow) !important;
+}
+
+/* Update the laser sweep effect for colored hover */
+.laser-hover-blue::before,
+.laser-hover-red::before,
+.laser-hover-green::before,
+.laser-hover-purple::before,
+.laser-hover-orange::before,
+.laser-hover-indigo::before,
+.laser-hover-turquoise::before,
+.laser-hover-pink::before,
+.laser-hover-emerald::before,
+.laser-hover-violet::before,
+.laser-hover-amber::before {
+  background: linear-gradient(90deg, transparent, var(--hover-color-light), transparent);
 }
 
 /* Enhanced Button Hover Effects */
@@ -247,9 +360,9 @@ body {
   box-shadow: 0 12px 30px rgba(6, 182, 212, 0.4);
 }
 
-/* Radial Gradient */
+/* Radial Gradient - reduced opacity to show more of the rotating background */
 .bg-radial-gradient {
-  background: radial-gradient(ellipse at center, transparent 0%, rgba(10, 10, 10, 0.3) 50%, rgba(10, 10, 10, 0.6) 100%);
+  background: radial-gradient(ellipse at center, transparent 0%, rgba(10, 10, 10, 0.1) 50%, rgba(10, 10, 10, 0.3) 100%);
 }
 
 /* Mouse Hover Effect */
@@ -289,39 +402,7 @@ body {
   opacity: 1;
 }
 
-/* Rotating Border Animation */
-.rotating-border {
-  position: relative;
-  overflow: hidden;
-}
 
-.rotating-border::after {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: linear-gradient(45deg, #3b82f6, #06b6d4, #8b5cf6, #3b82f6);
-  border-radius: inherit;
-  z-index: -1;
-  animation: rotate 2s linear infinite;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.rotating-border:hover::after {
-  opacity: 1;
-}
-
-@keyframes rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
 
 /* Enhanced Hover Effects */
 .hover-lift {
