@@ -1,6 +1,52 @@
 "use client";
 import { motion } from 'framer-motion';
+import { FileText, Shield, Users, Calendar, CheckCircle, AlertTriangle } from 'lucide-react';
 import React from 'react';
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.3
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: "easeOut"
+    }
+  }
+};
+
+const cardHoverVariants = {
+  hover: {
+    scale: 1.02,
+    y: -5,
+    transition: {
+      duration: 0.3,
+      ease: "easeInOut"
+    }
+  }
+};
+
+const iconHoverVariants = {
+  hover: {
+    scale: 1.2,
+    rotate: 360,
+    transition: {
+      duration: 0.3,
+      ease: "easeInOut"
+    }
+  }
+};
 
 export default function TermsClientContent() {
   return (
@@ -10,9 +56,9 @@ export default function TermsClientContent() {
         <div className="max-w-4xl mx-auto text-center">
           <motion.h1 
             className="page-title"
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
           >
             Terms of Service
           </motion.h1>
@@ -20,124 +66,278 @@ export default function TermsClientContent() {
             className="text-xl text-gray-medium max-w-3xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.2 }}
+            transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
           >
-            Last updated: January 15, 2025
+            Please read these terms carefully before using our services. By using WorkflowX, you agree to these terms.
           </motion.p>
         </div>
       </section>
 
-      {/* Content */}
+      {/* Key Terms */}
       <section className="py-20 px-5">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <motion.div 
-            className="glass p-8 rounded-2xl"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            <motion.div
+              className="glass p-8 rounded-2xl cursor-pointer"
+              variants={itemVariants}
+              whileHover="hover"
+              whileTap={{ scale: 0.98 }}
+            >
+              <motion.div
+                variants={cardHoverVariants}
+                className="h-full"
+              >
+                <motion.div 
+                  className="w-12 h-12 rounded-xl mb-6 flex items-center justify-center bg-gradient-to-r from-blue-primary to-turquoise-primary"
+                  variants={iconHoverVariants}
+                  whileHover="hover"
+                >
+                  <FileText className="w-6 h-6 text-white" />
+                </motion.div>
+                <motion.h3 
+                  className="card-title"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  Service Agreement
+                </motion.h3>
+                <p className="card-description">
+                  By using our platform, you agree to use our services in accordance with these terms and applicable laws.
+                </p>
+              </motion.div>
+            </motion.div>
+
+            <motion.div
+              className="glass p-8 rounded-2xl cursor-pointer"
+              variants={itemVariants}
+              whileHover="hover"
+              whileTap={{ scale: 0.98 }}
+            >
+              <motion.div
+                variants={cardHoverVariants}
+                className="h-full"
+              >
+                <motion.div 
+                  className="w-12 h-12 rounded-xl mb-6 flex items-center justify-center bg-gradient-to-r from-turquoise-primary to-aubergine-primary"
+                  variants={iconHoverVariants}
+                  whileHover="hover"
+                >
+                  <Shield className="w-6 h-6 text-white" />
+                </motion.div>
+                <motion.h3 
+                  className="card-title"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  Security & Privacy
+                </motion.h3>
+                <p className="card-description">
+                  We are committed to protecting your data and maintaining the security of our platform. Your privacy is our priority.
+                </p>
+              </motion.div>
+            </motion.div>
+
+            <motion.div
+              className="glass p-8 rounded-2xl cursor-pointer"
+              variants={itemVariants}
+              whileHover="hover"
+              whileTap={{ scale: 0.98 }}
+            >
+              <motion.div
+                variants={cardHoverVariants}
+                className="h-full"
+              >
+                <motion.div 
+                  className="w-12 h-12 rounded-xl mb-6 flex items-center justify-center bg-gradient-to-r from-aubergine-primary to-blue-primary"
+                  variants={iconHoverVariants}
+                  whileHover="hover"
+                >
+                  <Users className="w-6 h-6 text-white" />
+                </motion.div>
+                <motion.h3 
+                  className="card-title"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  User Responsibilities
+                </motion.h3>
+                <p className="card-description">
+                  Users are responsible for maintaining the security of their accounts and complying with our acceptable use policy.
+                </p>
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Service Details */}
+      <section className="py-20 px-5 bg-gradient-to-r from-blue-primary/5 to-aubergine-primary/5">
+        <div className="max-w-4xl mx-auto">
+          <motion.h2 
+            className="section-title"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
             viewport={{ once: true }}
           >
-            <div className="prose prose-invert max-w-none">
-              <h2 className="text-2xl font-bold mb-6 text-white">1. Acceptance of Terms</h2>
-              <p className="text-gray-medium mb-6">
-                By accessing and using WorkflowX services, you accept and agree to be bound by the terms 
-                and provision of this agreement. If you do not agree to abide by the above, please do not use this service.
-              </p>
-
-              <h2 className="text-2xl font-bold mb-6 text-white mt-12">2. Description of Service</h2>
-              <p className="text-gray-medium mb-6">
-                WorkflowX provides AI-powered automation services that help businesses streamline their workflows 
-                while maintaining human oversight and control. Our services include workflow automation, 
-                data processing, and intelligent assistance tools.
-              </p>
-
-              <h2 className="text-2xl font-bold mb-6 text-white mt-12">3. User Accounts</h2>
-              <p className="text-gray-medium mb-6">
-                You are responsible for maintaining the confidentiality of your account and password. 
-                You agree to accept responsibility for all activities that occur under your account or password.
-              </p>
-
-              <h2 className="text-2xl font-bold mb-6 text-white mt-12">4. Acceptable Use</h2>
-              <p className="text-gray-medium mb-6">
-                You agree not to use the service to:
-              </p>
-              <ul className="text-gray-medium mb-6 list-disc pl-6 space-y-2">
-                <li>Violate any applicable laws or regulations</li>
-                <li>Infringe upon the rights of others</li>
-                <li>Transmit harmful, offensive, or inappropriate content</li>
-                <li>Attempt to gain unauthorized access to our systems</li>
-                <li>Interfere with the proper functioning of the service</li>
-                <li>Use the service for any illegal or unauthorized purpose</li>
-              </ul>
-
-              <h2 className="text-2xl font-bold mb-6 text-white mt-12">5. Intellectual Property</h2>
-              <p className="text-gray-medium mb-6">
-                The service and its original content, features, and functionality are and will remain the 
-                exclusive property of WorkflowX and its licensors. The service is protected by copyright, 
-                trademark, and other laws.
-              </p>
-
-              <h2 className="text-2xl font-bold mb-6 text-white mt-12">6. Privacy Policy</h2>
-              <p className="text-gray-medium mb-6">
-                Your privacy is important to us. Please review our Privacy Policy, which also governs your 
-                use of the service, to understand our practices.
-              </p>
-
-              <h2 className="text-2xl font-bold mb-6 text-white mt-12">7. Payment Terms</h2>
-              <p className="text-gray-medium mb-6">
-                Subscription fees are billed in advance on a monthly or annual basis. All fees are non-refundable 
-                except as expressly stated in these terms. We reserve the right to change our pricing with 30 days notice.
-              </p>
-
-              <h2 className="text-2xl font-bold mb-6 text-white mt-12">8. Service Availability</h2>
-              <p className="text-gray-medium mb-6">
-                We strive to maintain high availability of our services, but we do not guarantee uninterrupted 
-                access. We may perform maintenance or updates that temporarily affect service availability.
-              </p>
-
-              <h2 className="text-2xl font-bold mb-6 text-white mt-12">9. Data and Security</h2>
-              <p className="text-gray-medium mb-6">
-                We implement appropriate security measures to protect your data. However, no method of transmission 
-                over the internet is 100% secure, and we cannot guarantee absolute security.
-              </p>
-
-              <h2 className="text-2xl font-bold mb-6 text-white mt-12">10. Limitation of Liability</h2>
-              <p className="text-gray-medium mb-6">
-                In no event shall WorkflowX, nor its directors, employees, partners, agents, suppliers, 
-                or affiliates, be liable for any indirect, incidental, special, consequential, or punitive 
-                damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses.
-              </p>
-
-              <h2 className="text-2xl font-bold mb-6 text-white mt-12">11. Termination</h2>
-              <p className="text-gray-medium mb-6">
-                We may terminate or suspend your account and bar access to the service immediately, without prior 
-                notice or liability, under our sole discretion, for any reason whatsoever and without limitation, 
-                including but not limited to a breach of the Terms.
-              </p>
-
-              <h2 className="text-2xl font-bold mb-6 text-white mt-12">12. Governing Law</h2>
-              <p className="text-gray-medium mb-6">
-                These Terms shall be interpreted and governed by the laws of the State of California, 
-                without regard to its conflict of law provisions.
-              </p>
-
-              <h2 className="text-2xl font-bold mb-6 text-white mt-12">13. Changes to Terms</h2>
-              <p className="text-gray-medium mb-6">
-                We reserve the right, at our sole discretion, to modify or replace these Terms at any time. 
-                If a revision is material, we will provide at least 30 days notice prior to any new terms taking effect.
-              </p>
-
-              <h2 className="text-2xl font-bold mb-6 text-white mt-12">14. Contact Information</h2>
-              <p className="text-gray-medium mb-6">
-                If you have any questions about these Terms of Service, please contact us at:
-              </p>
-              <div className="bg-bg-section p-6 rounded-xl">
-                <p className="text-gray-medium">
-                  <strong>Email:</strong> legal@workflowx.com<br />
-                  <strong>Address:</strong> 123 Tech Street, San Francisco, CA 94105<br />
-                  <strong>Phone:</strong> +1 (555) 123-4567
+            Service Terms & Conditions
+          </motion.h2>
+          
+          <motion.div 
+            className="space-y-8 mt-16"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            <motion.div
+              className="glass p-8 rounded-2xl cursor-pointer"
+              variants={itemVariants}
+              whileHover="hover"
+              whileTap={{ scale: 0.98 }}
+            >
+              <motion.div
+                variants={cardHoverVariants}
+                className="h-full"
+              >
+                <div className="flex items-start gap-4 mb-6">
+                  <motion.div 
+                    className="w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-r from-blue-primary to-turquoise-primary flex-shrink-0"
+                    variants={iconHoverVariants}
+                    whileHover="hover"
+                  >
+                    <CheckCircle className="w-6 h-6 text-white" />
+                  </motion.div>
+                  <motion.h3 
+                    className="card-title"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    Acceptable Use
+                  </motion.h3>
+                </div>
+                <p className="card-description">
+                  You agree to use our services only for lawful purposes and in accordance with these terms. Prohibited activities include unauthorized access, data breaches, and misuse of our platform.
                 </p>
-              </div>
+              </motion.div>
+            </motion.div>
+
+            <motion.div
+              className="glass p-8 rounded-2xl cursor-pointer"
+              variants={itemVariants}
+              whileHover="hover"
+              whileTap={{ scale: 0.98 }}
+            >
+              <motion.div
+                variants={cardHoverVariants}
+                className="h-full"
+              >
+                <div className="flex items-start gap-4 mb-6">
+                  <motion.div 
+                    className="w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-r from-turquoise-primary to-aubergine-primary flex-shrink-0"
+                    variants={iconHoverVariants}
+                    whileHover="hover"
+                  >
+                    <Calendar className="w-6 h-6 text-white" />
+                  </motion.div>
+                  <motion.h3 
+                    className="card-title"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    Service Availability
+                  </motion.h3>
+                </div>
+                <p className="card-description">
+                  We strive to maintain high service availability but cannot guarantee uninterrupted access. We may perform maintenance or updates that temporarily affect service availability.
+                </p>
+              </motion.div>
+            </motion.div>
+
+            <motion.div
+              className="glass p-8 rounded-2xl cursor-pointer"
+              variants={itemVariants}
+              whileHover="hover"
+              whileTap={{ scale: 0.98 }}
+            >
+              <motion.div
+                variants={cardHoverVariants}
+                className="h-full"
+              >
+                <div className="flex items-start gap-4 mb-6">
+                  <motion.div 
+                    className="w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-r from-aubergine-primary to-blue-primary flex-shrink-0"
+                    variants={iconHoverVariants}
+                    whileHover="hover"
+                  >
+                    <AlertTriangle className="w-6 h-6 text-white" />
+                  </motion.div>
+                  <motion.h3 
+                    className="card-title"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    Limitation of Liability
+                  </motion.h3>
+                </div>
+                <p className="card-description">
+                  Our liability is limited to the amount you paid for our services. We are not liable for indirect, incidental, or consequential damages arising from your use of our platform.
+                </p>
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 px-5">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.div 
+            className="glass p-16 rounded-3xl"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+            whileHover={{ 
+              scale: 1.02,
+              transition: { duration: 0.3 }
+            }}
+          >
+            <motion.h2 
+              className="text-3xl md:text-4xl font-bold mb-6 gradient-text"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+            >
+              Questions About Our Terms?
+            </motion.h2>
+            <p className="text-lg text-gray-medium mb-10 max-w-2xl mx-auto">
+              If you have any questions about these terms of service or need clarification on any points, please contact our legal team.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-5 justify-center">
+              <motion.a 
+                href="/contact" 
+                className="btn-primary w-full sm:w-auto"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ duration: 0.2 }}
+              >
+                Contact Us
+              </motion.a>
+              <motion.a 
+                href="/legal/privacy" 
+                className="btn-secondary w-full sm:w-auto"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ duration: 0.2 }}
+              >
+                Privacy Policy
+              </motion.a>
             </div>
           </motion.div>
         </div>

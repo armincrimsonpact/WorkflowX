@@ -52,32 +52,68 @@ const additionalFeatures = [
   {
     icon: 'Zap',
     title: 'Lightning Fast',
-    description: 'Process automation in milliseconds with our optimized AI engine.'
+    description: 'Process automation in milliseconds with our optimized AI engine.',
+    gradient: 'from-blue-primary to-turquoise-primary',
+    benefits: [
+      'Sub-second response times',
+      'Optimized for high throughput',
+      'Reduced processing delays'
+    ]
   },
   {
     icon: 'Target',
     title: 'Precision Control',
-    description: 'Fine-tune every aspect of your automation with granular controls.'
+    description: 'Fine-tune every aspect of your automation with granular controls.',
+    gradient: 'from-turquoise-primary to-aubergine-primary',
+    benefits: [
+      'Granular permission settings',
+      'Custom workflow triggers',
+      'Detailed audit trails'
+    ]
   },
   {
     icon: 'Brain',
     title: 'Smart Learning',
-    description: 'AI that continuously improves based on your team\'s feedback and patterns.'
+    description: 'AI that continuously improves based on your team\'s feedback and patterns.',
+    gradient: 'from-aubergine-primary to-blue-primary',
+    benefits: [
+      'Adaptive algorithms',
+      'Pattern recognition',
+      'Continuous optimization'
+    ]
   },
   {
     icon: 'Settings',
     title: 'Customizable',
-    description: 'Adapt the platform to your unique business processes and requirements.'
+    description: 'Adapt the platform to your unique business processes and requirements.',
+    gradient: 'from-blue-primary to-turquoise-primary',
+    benefits: [
+      'Flexible configuration',
+      'Custom integrations',
+      'Branded interfaces'
+    ]
   },
   {
     icon: 'Lock',
     title: 'Privacy First',
-    description: 'Your data stays yours with end-to-end encryption and privacy controls.'
+    description: 'Your data stays yours with end-to-end encryption and privacy controls.',
+    gradient: 'from-turquoise-primary to-aubergine-primary',
+    benefits: [
+      'End-to-end encryption',
+      'GDPR compliance',
+      'Data sovereignty'
+    ]
   },
   {
     icon: 'Globe',
     title: 'Global Scale',
-    description: 'Deploy automation across multiple regions and time zones seamlessly.'
+    description: 'Deploy automation across multiple regions and time zones seamlessly.',
+    gradient: 'from-aubergine-primary to-blue-primary',
+    benefits: [
+      'Multi-region deployment',
+      'Global CDN',
+      '24/7 availability'
+    ]
   }
 ];
 
